@@ -1523,6 +1523,10 @@ input[type='date'] {
   letter-spacing: -0.042em;
   line-height: 1.1;
 }
+.ob-title--welcome {
+  font-size: clamp(24px, 6.8vw, 31px);
+  line-height: 1.16;
+}
 .ob-sub {
   margin: 12px 0 22px;
   font-size: 14px;

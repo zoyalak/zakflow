@@ -65,7 +65,7 @@ export function renderOnboarding(appDiv) {
         <div class="ob-dots" aria-hidden="true"><i class="is-on"></i><i></i></div>
       </header>
       <div class="ob-main">
-        <h1 class="ob-title">How much money<br />do you have?</h1>
+        <h1 class="ob-title ob-title--welcome">Welcome to ZakFlow! Feed me your balance and I&rsquo;ll make it last</h1>
         <p class="ob-sub">We'll split it evenly across the weeks ahead, then rebalance as you spend.</p>
         <form class="form" novalidate>
           <div class="money-input money-input--lg">
@@ -119,7 +119,7 @@ export function renderOnboarding(appDiv) {
       <div class="ob-dots" aria-hidden="true"><i class="is-on"></i><i class="is-on"></i></div>
     </header>
     <div class="ob-main">
-      <h1 class="ob-title">Until what date<br />should it last?</h1>
+      <h1 class="ob-title">Lovely! When do you need this to last until?</h1>
       <p class="ob-sub">Pick the last day this money needs to cover. A partial week still counts as a week.</p>
       <form class="form" novalidate>
         <div class="field">

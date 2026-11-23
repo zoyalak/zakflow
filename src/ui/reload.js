@@ -54,7 +54,7 @@ export function openReloadDialog() {
         </div>
         <form class="form" novalidate>
           <div class="field">
-            <label class="field-label" for="rl-amount">How much money do you want to add?</label>
+            <label class="field-label" for="rl-amount">Top-up time! How much are we loading in?</label>
             <div class="money-input money-input--sm">
               <span class="prefix">${escapeHtml(symbol)}</span>
               <input id="rl-amount" inputmode="decimal" autocomplete="off" placeholder="0" value="${escapeHtml(
