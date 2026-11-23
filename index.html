@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>ZakFlow — Money Tracker</title>
+    <meta
+      name="description"
+      content="ZakFlow splits the money you have evenly across the weeks ahead, so you always know what this week can cost."
+    />
+    <meta name="theme-color" content="#080B0A" id="theme-color" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="ZakFlow" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
+    <script>
+      // Choose the theme before first paint so there is no flash of the wrong colours.
+      (function () {
+        var theme = null;
+        try {
+          var raw = localStorage.getItem('pace.state.v1');
+          var saved = raw ? JSON.parse(raw) : null;
+          theme = saved && saved.settings && saved.settings.theme;
+        } catch (err) {}
+        if (theme !== 'light' && theme !== 'dark') {
+          theme = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+        }
+        document.documentElement.dataset.theme = theme;
+        var meta = document.getElementById('theme-color');
+        if (meta) meta.setAttribute('content', theme === 'light' ? '#F5F7F4' : '#080B0A');
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="app"></div>
+    <div id="layer"></div>
+    <div id="toasts" class="toasts" aria-live="polite"></div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

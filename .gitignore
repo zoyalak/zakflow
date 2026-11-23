@@ -1,0 +1,9 @@
+node_modules/
+dist/
+.preview.log
+.preview.pid
+.env
+.env.*
+.DS_Store
+Thumbs.db
+*.local
