@@ -33,8 +33,8 @@ function validEntry(entry) {
  * today: Date (defaults to now). Only the calendar day matters.
  */
 export function computePlan(state, today = new Date()) {
-  // Weeks always run Monday → Sunday. Monday is 1 in JS's getDay().
-  const weekStartDay = 1;
+  // Weeks always run Saturday → Friday. Saturday is 6 in JS's getDay().
+  const weekStartDay = 6;
   const todayDate = startOfDay(today);
 
   // 1. Money in. The "total balance" is what was entered at onboarding plus
@@ -136,7 +136,7 @@ export function computePlan(state, today = new Date()) {
  * The calendar-week count between two dates, used by the onboarding and reload
  * previews before a plan exists. A partial last week counts as a week.
  */
-export function weeksBetween(startISO, endISO, weekStartDay = 1) {
+export function weeksBetween(startISO, endISO, weekStartDay = 6) {
   const start = startOfWeek(parseISO(startISO), weekStartDay);
   const end = startOfWeek(parseISO(endISO), weekStartDay);
   return Math.max(1, Math.round(daysBetween(start, end) / 7) + 1);

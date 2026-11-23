@@ -28,7 +28,7 @@ export function emptyState() {
     initialAmount: 0,
     entries: [],
     reloads: [],
-    settings: { currency: DEFAULT_CURRENCY, weekStartDay: 1, theme: systemTheme() },
+    settings: { currency: DEFAULT_CURRENCY, weekStartDay: 6, theme: systemTheme() },
   };
 }
 
@@ -107,8 +107,8 @@ export function normalize(raw) {
   if (!CURRENCIES.some((currency) => currency.code === state.settings.currency)) {
     state.settings.currency = DEFAULT_CURRENCY;
   }
-  // Weeks are always Monday → Sunday, so an older Sunday preference is normalised away.
-  state.settings.weekStartDay = 1;
+  // Weeks are always Saturday → Friday.
+  state.settings.weekStartDay = 6;
   state.settings.theme = state.settings.theme === 'light' ? 'light' : state.settings.theme === 'dark' ? 'dark' : systemTheme();
 
   // Repair dates rather than throwing data away.

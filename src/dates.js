@@ -55,7 +55,7 @@ export function addMonths(value, amount) {
   return startOfDay(target);
 }
 
-/** First day of the calendar week containing `value`. weekStartDay: 0 = Sunday, 1 = Monday. */
+/** First day of the calendar week containing `value`. weekStartDay: 0 = Sunday, 6 = Saturday. */
 export function startOfWeek(value, weekStartDay = 1) {
   const date = startOfDay(value);
   const shift = (date.getDay() - weekStartDay + 7) % 7;
