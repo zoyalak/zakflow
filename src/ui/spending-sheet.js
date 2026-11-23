@@ -3,6 +3,7 @@
 import { actions, getState } from '../state.js';
 import { isValidISO, toISO } from '../dates.js';
 import { currencySymbol, escapeHtml, formatDayYear, formatMoney, parseAmount } from '../utils.js';
+import { setupDateField } from './date-field.js';
 import { icon } from './icons.js';
 import { guardAmountInput } from './numeric-input.js';
 import { openModal, sheetHeading } from './modal.js';
@@ -64,7 +65,7 @@ export function openSpendingSheet(entry = null) {
       const amountInput = modal.body.querySelector('#sp-amount');
       guardAmountInput(amountInput);
       const noteInput = modal.body.querySelector('#sp-note');
-      const dateInput = modal.body.querySelector('#sp-date');
+      const dateInput = setupDateField(modal.body.querySelector('#sp-date'));
 
       const setError = (field, message) => {
         const node = modal.body.querySelector(`[data-error="${field}"]`);

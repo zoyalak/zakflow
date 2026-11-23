@@ -18,6 +18,7 @@ export const CURRENCIES = [
   { code: 'BRL', symbol: 'R$', name: 'Brazilian Real' },
   { code: 'MXN', symbol: 'MX$', name: 'Mexican Peso' },
   { code: 'PHP', symbol: '₱', name: 'Philippine Peso' },
+  { code: 'MYR', symbol: 'RM', name: 'Malaysian Ringgit' },
   { code: 'SEK', symbol: 'kr', name: 'Swedish Krona' },
   { code: 'PLN', symbol: 'zł', name: 'Polish Złoty' },
   { code: 'AED', symbol: 'AED', name: 'UAE Dirham' },

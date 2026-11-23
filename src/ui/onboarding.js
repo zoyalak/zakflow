@@ -11,6 +11,7 @@ import {
   parseAmount,
   plural,
 } from '../utils.js';
+import { setupDateField } from './date-field.js';
 import { brandMark, icon } from './icons.js';
 import { guardAmountInput } from './numeric-input.js';
 
@@ -140,7 +141,7 @@ export function renderOnboarding(appDiv) {
       <button type="button" class="btn btn--primary btn--block" data-finish>Start tracking</button>
     </div>`;
 
-    const dateInput = root.querySelector('#ob-end');
+    const dateInput = setupDateField(root.querySelector('#ob-end'));
     const error = root.querySelector('[data-error="date"]');
     const preview = root.querySelector('[data-preview]');
 

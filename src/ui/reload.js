@@ -4,6 +4,7 @@ import { computePlan } from '../calc.js';
 import { addDays, isValidISO, toISO } from '../dates.js';
 import { actions, getState } from '../state.js';
 import { currencySymbol, escapeHtml, formatDayYear, formatMoney, parseAmount, plural } from '../utils.js';
+import { setupDateField } from './date-field.js';
 import { icon } from './icons.js';
 import { guardAmountInput } from './numeric-input.js';
 import { openModal, sheetHeading } from './modal.js';
@@ -133,7 +134,7 @@ export function openReloadDialog() {
         <button type="button" class="btn btn--primary" data-confirm>${icon('check')} Reload</button>
       </div>`;
 
-    const dateInput = modal.body.querySelector('#rl-end');
+    const dateInput = setupDateField(modal.body.querySelector('#rl-end'));
     const preview = modal.body.querySelector('[data-preview]');
 
     const updatePreview = () => {
