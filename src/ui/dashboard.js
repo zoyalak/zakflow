@@ -50,8 +50,6 @@ export function renderDashboard(root, state) {
       <div class="hero-until">${icon('flag')}<span>until <strong>${formatDayYear(plan.endDate)}</strong></span></div>
       <div class="hero-stats">
         <div class="hero-stat"><span>${plan.weeksLeft}</span><small>${plural(plan.weeksLeft, 'week left', 'weeks left')}</small></div>
-        <span class="hero-divider" aria-hidden="true"></span>
-        <div class="hero-stat"><span>${fmt(plan.weeklyBudget)}</span><small>per week</small></div>
       </div>
     </div>
 
@@ -71,15 +69,14 @@ export function renderDashboard(root, state) {
         <p class="big ${over ? 'is-over' : ''}" data-fx-money="week-left" data-value="${week.left}">${fmt(week.left)}</p>
       </div>
 
-      <div class="split">
-        <div><span>Week budget</span><strong>${fmt(week.budget)}</strong></div>
+      <div class="split split--single">
         <div><span>Spent so far</span><strong>${fmt(week.spent)}</strong></div>
       </div>
 
       ${progressBar(ratio, 'week-progress', over)}
       <div class="progress-meta">
-        <span>${Math.round(ratio * 100)}% of budget used</span>
-        <span>${over ? `${fmt(Math.abs(week.left))} over budget` : `${fmt(week.left)} still available`}</span>
+        <span>${Math.round(ratio * 100)}% used</span>
+        <span>${over ? `${fmt(Math.abs(week.left))} over` : `${fmt(week.left)} still available`}</span>
       </div>
 
       <button type="button" class="btn btn--primary btn--block week-add" data-add>${icon('plus')} Add spending</button>

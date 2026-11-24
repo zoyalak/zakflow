@@ -99,12 +99,23 @@ export function computePlan(state, today = new Date()) {
     });
   }
 
-  // 4. Redistribution. A partial last week counts as a whole week, and the
-  //    current week is part of the split. `remaining` already has every spend
-  //    deducted, so each open week's spendable share is simply remaining ÷
-  //    weeksLeft — subtracting a week's spend again here would double-count it.
+  // 4. The weekly split. The money the week started with — everything in minus
+  //    what finished weeks already spent — is shared equally between the weeks
+  //    that are still open, this one included. A partial last week counts as a
+  //    whole week.
+  //
+  //      allowance = (balance at the start of this week) ÷ weeksLeft
+  //      left      = allowance − spent in that week
+  //
+  //    Spending therefore eats into this week's remainder instead of shrinking
+  //    the allowance itself, and because every open week gets the same share,
+  //    the lefts still add straight back up to `remaining`.
   const weeksLeft = Math.max(1, Math.round(daysBetween(currentWeekStart, lastWeekStart) / 7) + 1);
-  const weeklyBudget = remaining / weeksLeft;
+  const spentBeforeWeek = weeks
+    .filter((week) => week.isPast)
+    .reduce((sum, week) => sum + week.spent, 0);
+  const weekStartBalance = totalBalance - spentBeforeWeek;
+  const weeklyBudget = weekStartBalance / weeksLeft;
 
   for (const week of weeks) {
     if (week.isPast) {
@@ -112,9 +123,8 @@ export function computePlan(state, today = new Date()) {
       week.budget = week.spent;
       week.left = 0;
     } else {
-      // Total allowance for the week, so budget − spent = left still holds.
-      week.budget = weeklyBudget + week.spent;
-      week.left = weeklyBudget;
+      week.budget = weeklyBudget;
+      week.left = weeklyBudget - week.spent;
     }
   }
 
@@ -124,6 +134,7 @@ export function computePlan(state, today = new Date()) {
     totalBalance,
     totalSpent,
     remaining,
+    weekStartBalance,
     weeks,
     weeksLeft,
     weeklyBudget,

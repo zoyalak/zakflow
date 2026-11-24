@@ -54,7 +54,7 @@ export function renderWeeks(root, state) {
     <header class="view-head">
       <p class="eyebrow">The plan</p>
       <h1>Week by week</h1>
-      <p class="sub">${fmt(plan.remaining)} left · ${fmt(plan.weeklyBudget)} per week across ${plan.weeksLeft} ${plural(
+      <p class="sub">${fmt(plan.remaining)} left across ${plan.weeksLeft} ${plural(
     plan.weeksLeft,
     'week',
     'weeks'

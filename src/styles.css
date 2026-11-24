@@ -737,6 +737,9 @@ svg {
   gap: 10px;
   margin-top: 14px;
 }
+.split--single {
+  grid-template-columns: 1fr;
+}
 .split > div {
   background: var(--surface-2);
   border-radius: 14px;
