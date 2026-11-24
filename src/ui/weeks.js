@@ -36,8 +36,14 @@ export function renderWeeks(root, state) {
           }</span>
         </div>
         <div class="tl-bottom">
-          <span class="tl-amount">${fmt(week.isPast ? week.spent : week.budget)}</span>
-          <span class="tl-spent">${week.isPast ? 'final spend' : week.isCurrent ? `of ${fmt(week.budget)} · ${fmt(week.spent)} spent` : `budget · ${fmt(week.spent)} spent`}</span>
+          <span class="tl-amount">${fmt(week.isPast ? week.spent : week.left)}</span>
+          <span class="tl-spent">${
+            week.isPast
+              ? 'final spend'
+              : week.isCurrent
+                ? `left of ${fmt(week.budget)} · ${fmt(week.spent)} spent`
+                : `left of ${fmt(week.budget)} budget`
+          }</span>
         </div>
         ${week.isCurrent ? progressBar(ratio, 'tl-progress', week.left < 0) : ''}
       </div>

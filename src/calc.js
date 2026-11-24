@@ -5,14 +5,15 @@
  *
  * THE RULE
  * --------
- *   budget for each remaining week = (total balance − all spending so far)
- *                                    ÷ (number of weeks remaining, current week included)
+ *   money left for each open week = (total balance − all spending so far)
+ *                                   ÷ (number of weeks remaining, current week included)
  *
- * Spend less than a week's budget and `remaining` grows while the week count
- * stays the same, so every remaining week (this one too) gets a bigger share.
- * Overspend and the share shrinks by exactly the extra ÷ weeks left. Past
- * weeks are never recalculated: their money is already spent, their number is
- * final, and they do not take a second share of the split.
+ * That share is what is still spendable in every open week, so the shares add
+ * straight back up to `remaining`. A week's total allowance is its share plus
+ * whatever was already spent inside it, which keeps budget − spent = left.
+ * Spend less and `remaining` grows while the week count stays the same, so
+ * every open week (this one too) gets a bigger share. Past weeks are never
+ * recalculated: their money is already spent and their number is final.
  */
 
 import { addDays, daysBetween, parseISO, startOfDay, startOfWeek, toISO } from './dates.js';
@@ -99,7 +100,9 @@ export function computePlan(state, today = new Date()) {
   }
 
   // 4. Redistribution. A partial last week counts as a whole week, and the
-  //    current week is part of the split.
+  //    current week is part of the split. `remaining` already has every spend
+  //    deducted, so each open week's spendable share is simply remaining ÷
+  //    weeksLeft — subtracting a week's spend again here would double-count it.
   const weeksLeft = Math.max(1, Math.round(daysBetween(currentWeekStart, lastWeekStart) / 7) + 1);
   const weeklyBudget = remaining / weeksLeft;
 
@@ -109,8 +112,9 @@ export function computePlan(state, today = new Date()) {
       week.budget = week.spent;
       week.left = 0;
     } else {
-      week.budget = weeklyBudget;
-      week.left = weeklyBudget - week.spent;
+      // Total allowance for the week, so budget − spent = left still holds.
+      week.budget = weeklyBudget + week.spent;
+      week.left = weeklyBudget;
     }
   }
 
